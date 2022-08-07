@@ -1,5 +1,5 @@
 # sudoslv
-Sudoku solver using backtracking in C. Created to practice some C programming before I take 61C at Berkeley. Sorry for the lame project... this was all I could think of for the time being. 
+Sudoku solver using backtracking in C. Created to practice some C programming before I take 61C at Berkeley. Sorry for the lame project... this was all I could think of for the time being. I used pointers intentionally to get a feel of pointer concepts better in terms of array manipulation. 
 
 ### Getting Started
 Run the following command to clone the repo:
