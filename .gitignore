@@ -1,5 +1,9 @@
 # Mac OS
 .DS_Store
+/.vscode
+
+# Custom for Makefile
+sudoku
 
 # Prerequisites
 *.d
