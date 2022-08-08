@@ -23,12 +23,13 @@ int main(void) {
     }
 
     // processing.
-    if (solve(board, SIZE)) {
+    if (solve(board, SIZE, 0, 0)) {
         printf("Solved Board: \n");
-        printBoard(board, SIZE);
     } else {
         printf("The puzzle could not be solved.\n");
     }
+
+    printBoard(board, SIZE);
     
     // freeing allocated space.
     for (int i = 0; i < SIZE; i++) free(board[i]);
