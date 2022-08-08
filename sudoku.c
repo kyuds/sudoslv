@@ -5,7 +5,7 @@
 
 #define SIZE 9
 
-bool readBoard(int **board);
+bool readBoard(int **board, bool state);
 void printBoard(int **board, int n);
 bool compareBoard(int **board1, int **board2, int n);
 
@@ -17,7 +17,7 @@ int main(void) {
     }
 
     // read-in board.
-    if (readBoard(board) == 0) {
+    if (readBoard(board, true) == 0) {
         printf("File couldn't be read.\n");
         return 0;
     }
@@ -25,21 +25,43 @@ int main(void) {
     // processing.
     if (solve(board, SIZE, 0, 0)) {
         printf("Solved Board: \n");
+        printBoard(board, SIZE);
     } else {
         printf("The puzzle could not be solved.\n");
     }
 
-    printBoard(board, SIZE);
+    // compare with answer.
+    int *answer[SIZE];
+    for (int i = 0; i < SIZE; i++) {
+        answer[i] = (int *) malloc(SIZE * sizeof(int));
+    }
+
+    if (readBoard(answer, false) == 0) {
+        printf("File couldn't be read.\n");
+        return 0;
+    }
+
+    if (compareBoard(board, answer, SIZE)) {
+        printf("\nSolved puzzle corresponds to answer.");
+    }
     
     // freeing allocated space.
-    for (int i = 0; i < SIZE; i++) free(board[i]);
+    for (int i = 0; i < SIZE; i++) {
+        free(board[i]);
+        free(answer[i]);
+    }
 
     return 0;
 }
 
-bool readBoard(int **board) {
+bool readBoard(int **board, bool state) {
     FILE *file = NULL;
-    file = fopen("./samples/q.txt", "r");
+
+    if (state) {
+        file = fopen("./samples/q.txt", "r");
+    } else {
+        file = fopen("./samples/a.txt", "r");
+    }
 
     if (file == NULL) {
         return false;
